@@ -10,7 +10,8 @@ import TransferPage from "./components/TransferPage"
 const App=()=> {
   const [transferView,SetTransferView] = useState(false)
   const [togview,setView]= useState(false)
-   
+   const [name,setName]=useState('')
+   const [amount,setAmount]=useState(0)
   const [users,setUser]= useState([{
       name: "Biswa",
       email: "biswajittlh@gmail.com",
@@ -32,9 +33,26 @@ const App=()=> {
 ])
 const toggleUse =()=>{
    setView(!togview)
+   SetTransferView(false)
 }
   const toggleTransfer=()=>{
     SetTransferView(true)
+    setView(false)
+  }
+  const UpdateUser=({name,amount})=>{
+    setUser(users.map((user)=>{
+      return user.name==name ? {...user,balance:user.balance+parseInt(amount,10)}:user
+    }))
+  }
+  const onSubmit=(e)=>{
+    e.preventDefault()
+    if(!name){
+      alert('please add name')
+      return
+    }
+    UpdateUser({name,amount})
+    setName('')
+    setAmount(0)
   }
   
     return (
@@ -46,7 +64,8 @@ const toggleUse =()=>{
                 <a href="/" className="link2">About Us</a>
                 <a href="/" className="link3">Contact Us</a>
                 <button className="bread-nav" onClick={toggleTransfer}>Transfer Money</button>
-           
+                <button className="bread-item" onClick={toggleUse}> View All Customers </button>
+          
             </nav>
             <div className='jumbo'>
               <h4>  My Bank</h4>
@@ -56,14 +75,17 @@ const toggleUse =()=>{
             </p>
             </div>
         </div>
-        {!transferView? <Main toggleUse={toggleUse} users={users} togview={togview}/>:  <form> <div className="form-control">
-   <label htmlFor="Name">Name </label>
-    <input type="text" className="text" name="Name"  placeholder="Full Name"/>
+        {!transferView? <Main toggleUse={toggleUse} users={users} togview={togview}/>: 
+         <form onSubmit={onSubmit}> <div className="form-control">
+   <label htmlFor="name">Name </label>
+    <input type="text" className="text" name="name" 
+   value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Full Name"/>
 </div>   
   
  <div className="form-control">
    <label htmlFor="amount">Amount </label> 
-   <input type="number" className="text" name="amount"/>
+   <input type="number" className="text"
+   value={amount} onChange={(e)=>setAmount(e.target.value)} name="amount"/>
 </div> 
 <div className="form-control-submit">
  <input type="submit" className="submit"/>
