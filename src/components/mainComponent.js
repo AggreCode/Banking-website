@@ -2,6 +2,7 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import { Media, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Users from './viewCustomers'
+import TransferPage from './TransferPage'
 import {Link} from 'react-router-dom'
 const Home =()=>{
     return(
@@ -14,43 +15,26 @@ const Home =()=>{
    </div>
     )
  }
+
  
-function  Main() {
-   const [togview,setView]= useState(false)
-   const [users,setUser]= useState([{
-       name: "Biswa",
-       email: "biswajittlh@gmail.com",
-       balance: 2000
+function  Main({toggleUse,togview, users}) {
+    
+ 
 
-   },
-   {
-    name: "Biswa1.0",
-    email: "biswajittlh@gmail.com",
-    balance: 20000
-
-},
-{
-    name: "Biswa2.0",
-    email: "biswajittlh@gmail.com",
-    balance: 200000
-
-}
-])
-const toggleUse =()=>{
-    setView(true)
-}
     return (
-        <div>
+        <div className="main">
          
             
             <div className='bread'>
             <a className="bread-item active">Home</a>
              <button className="bread-item" onClick={toggleUse}> View All Customers </button>
-            </div>
+              </div>
                 <div>
-                  {!togview? <Home /> :<Users users={users}/>} 
-             
-                </div>
+          
+               {!togview? <Home /> :<Users users={users}/>}
+                
+                    </div>
+
              
         </div>
     )
