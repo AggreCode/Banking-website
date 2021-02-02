@@ -45,7 +45,10 @@ const toggleUse =()=>{
   }
   const UpdateUser=({name,amount,name2})=>{
     setUser(users.map((user)=>{
-      return user.name==name ? {...user,balance:user.balance+parseInt(amount,10)}:user
+      return user.name==name ? {...user,balance:(user.balance)  - (parseInt(amount,10))}:user
+    }))
+    setUser(users.map((user)=>{
+      return user.name==name2 ? {...user,balance:user.balance+parseInt(amount,10)}:user
     }))
    
   }
