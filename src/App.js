@@ -11,6 +11,7 @@ const App=()=> {
   const [transferView,SetTransferView] = useState(false)
   const [togview,setView]= useState(false)
    const [name,setName]=useState('')
+   const [name2,setName2]=useState('')
    const [amount,setAmount]=useState(0)
   const [users,setUser]= useState([{
       name: "Biswa",
@@ -31,6 +32,9 @@ const App=()=> {
 
 }
 ])
+const [logbook,setLogbook]= useState(
+  []
+)
 const toggleUse =()=>{
    setView(!togview)
    SetTransferView(false)
@@ -39,19 +43,25 @@ const toggleUse =()=>{
     SetTransferView(true)
     setView(false)
   }
-  const UpdateUser=({name,amount})=>{
+  const UpdateUser=({name,amount,name2})=>{
     setUser(users.map((user)=>{
       return user.name==name ? {...user,balance:user.balance+parseInt(amount,10)}:user
     }))
+   
   }
   const onSubmit=(e)=>{
     e.preventDefault()
     if(!name){
-      alert('please add name')
+      alert('please add sender')
       return
     }
-    UpdateUser({name,amount})
+    if(!name2){
+      alert('please add receiver')
+      return
+    }
+    UpdateUser({name,amount,name2})
     setName('')
+    setName2('')
     setAmount(0)
   }
   
@@ -77,9 +87,14 @@ const toggleUse =()=>{
         </div>
         {!transferView? <Main toggleUse={toggleUse} users={users} togview={togview}/>: 
          <form onSubmit={onSubmit}> <div className="form-control">
-   <label htmlFor="name">Name </label>
+   <label htmlFor="name">Sender </label>
     <input type="text" className="text" name="name" 
    value={name} onChange={(e)=>setName(e.target.value)}  placeholder="Full Name"/>
+</div>   
+<div className="form-control">
+   <label htmlFor="name2">Receiver </label>
+    <input type="text" className="text" name="name2" 
+   value={name2} onChange={(e)=>setName2(e.target.value)}  placeholder="Full Name"/>
 </div>   
   
  <div className="form-control">
