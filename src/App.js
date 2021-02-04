@@ -29,8 +29,8 @@ const fetchUsers= async ()=>{
   const data = await res.json();
   return data
 }
-const fetchUsers= async ()=>{
-  const res= await fetch ('http://localhost:5000/users')
+const fetchUser= async (id)=>{
+  const res= await fetch (`http://localhost:5000/users/${id}`)
   const data = await res.json();
   return data
 }
@@ -43,43 +43,68 @@ const toggleUse =()=>{
     SetTransferView(true)
     setView(false)
   }
-  const UpdateUser1=({name,amount})=>{
-    setUser(users.map((user,id)=>{
-      return user.name==name ? {...user,balance:(user.balance) -(parseInt(amount,10))}:user
-    }))
+  const getUser1=({name})=>{
+   const id1= users.map((user)=>{
+      return user.name==name ? user.id:user
+    })
+  
+  return parseInt(id1)
    
+  }
+  const getUser2=({name2})=>{
+    const id2= users.map((user)=>{
+       return user.name==name2 ? user.id:user
+     })
+     return parseInt(id2)
+   
+     
     
-   
-  }
-  const UpdateUser2=({name2,amount})=>{
-    setUser(users.map((user)=>{
-      return user.name==name2 ? {...user,balance:(user.balance) +(parseInt(amount,10))}:user
-    }))
-    
-   
-  }
-  const validateUser=({name,amount})=>{
-          users.map((user,index)=>{
-            return user.name==name && user.balance<amount ? false: user
-          })
-          return true
-  }
-  const onSubmit=(e)=>{
-    e.preventDefault()
-    if(!name){
-      alert('please add sender')
-      return
-    }
-    if(!name2){
-      alert('please add receiver')
-      return
-    }
-  if( validateUser({name,amount}))
-   {
-    UpdateUser1({name,amount})
-    UpdateUser2({name2,amount})
    }
-   else { alert('You Have insufficient balance')}
+   const LastUpdate=(user,data1,data2)=>{
+  
+     return user.name == name ? {...user,balance:data1.balance}:user
+    return user.name == name2 ? {...user,balance:data2.balance}:user
+   }
+ 
+  const onSubmit=async (e)=>{
+    e.preventDefault()
+    
+     const id1=getUser1({name})
+     const id2=getUser2({name2})
+     const sender = await fetchUser(id1)
+     const receiver = await fetchUser(id2)
+     const upsender ={...sender,balance: sender.balance - parseInt(amount)}
+     const upreceiver ={...receiver,balance: parseInt(receiver.balance) + parseInt(amount)}
+     console.log(upreceiver)
+     const res1 = await fetch(`http://localhost:5000/users/${id1}`,{
+       method:"PUT",
+       headers:{
+         'Content-type':'application/json'
+       },
+       body: JSON.stringify(upsender)
+     })
+     const res2 = await fetch(`http://localhost:5000/users/${id2}`,{
+      method:"PUT",
+      headers:{
+        'Content-type':'application/json'
+      },
+      body: JSON.stringify(upreceiver)
+    })
+    const data1 = res1.json()
+    const data2= res2.json() 
+     setUser(
+      users.map((user)=>{
+        return user.name == name ? {...user,balance:data2.balance}:user
+              })
+    )
+  
+    setUser(
+      users.map((user)=>{
+        return user.name == name2 ? {...user,balance:data1.balance}:user
+              })
+    )
+  
+    
      setName('')
     setName2('')
     setAmount(0)
