@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Biswa",
+      "balance": 20000
+    },
+    {
+      "id": 2,
+      "name": "Biswa1.0",
+      "balance": 20000
+    },
+    {
+      "id": 3,
+      "name": "Biswa2.0",
+      "balance": 20000
+    }
+  ]
+}

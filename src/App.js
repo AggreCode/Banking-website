@@ -13,28 +13,28 @@ const App=()=> {
    const [name,setName]=useState('')
    const [name2,setName2]=useState('')
    const [amount,setAmount]=useState(0)
-  const [users,setUser]= useState([{
-      name: "Biswa",
-      email: "biswajittlh@gmail.com",
-      balance: 2000
-
-  },
-  {
-   name: "Biswa1.0",
-   email: "biswajittlh@gmail.com",
-   balance: 20000
-
-},
-{
-   name: "Biswa2.0",
-   email: "biswajittlh@gmail.com",
-   balance: 200000
-
-}
-])
+  const [users,setUser]= useState()
 const [logbook,setLogbook]= useState(
   []
 )
+useEffect(()=>{
+  const getTasks = async() =>{
+    const users= await fetchUsers()
+    setUser(users)
+  }
+  getTasks()
+})
+const fetchUsers= async ()=>{
+  const res= await fetch ('http://localhost:5000/users')
+  const data = await res.json();
+  return data
+}
+const fetchUsers= async ()=>{
+  const res= await fetch ('http://localhost:5000/users')
+  const data = await res.json();
+  return data
+}
+
 const toggleUse =()=>{
    setView(!togview)
    SetTransferView(false)
@@ -43,14 +43,26 @@ const toggleUse =()=>{
     SetTransferView(true)
     setView(false)
   }
-  const UpdateUser=({name,amount,name2})=>{
-    setUser(users.map((user)=>{
-      return user.name==name ? {...user,balance:(user.balance)  - (parseInt(amount,10))}:user
-    }))
-    setUser(users.map((user)=>{
-      return user.name==name2 ? {...user,balance:user.balance+parseInt(amount,10)}:user
+  const UpdateUser1=({name,amount})=>{
+    setUser(users.map((user,id)=>{
+      return user.name==name ? {...user,balance:(user.balance) -(parseInt(amount,10))}:user
     }))
    
+    
+   
+  }
+  const UpdateUser2=({name2,amount})=>{
+    setUser(users.map((user)=>{
+      return user.name==name2 ? {...user,balance:(user.balance) +(parseInt(amount,10))}:user
+    }))
+    
+   
+  }
+  const validateUser=({name,amount})=>{
+          users.map((user,index)=>{
+            return user.name==name && user.balance<amount ? false: user
+          })
+          return true
   }
   const onSubmit=(e)=>{
     e.preventDefault()
@@ -62,8 +74,13 @@ const toggleUse =()=>{
       alert('please add receiver')
       return
     }
-    UpdateUser({name,amount,name2})
-    setName('')
+  if( validateUser({name,amount}))
+   {
+    UpdateUser1({name,amount})
+    UpdateUser2({name2,amount})
+   }
+   else { alert('You Have insufficient balance')}
+     setName('')
     setName2('')
     setAmount(0)
   }
@@ -88,7 +105,7 @@ const toggleUse =()=>{
             </p>
             </div>
         </div>
-        {!transferView? <Main toggleUse={toggleUse} users={users} togview={togview}/>: 
+        {!transferView? <Main toggleUse={toggleUse} users={users}  togview={togview}/>: 
          <form onSubmit={onSubmit}> <div className="form-control">
    <label htmlFor="name">Sender </label>
     <input type="text" className="text" name="name" 
