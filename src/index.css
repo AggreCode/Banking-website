@@ -4,12 +4,16 @@
   margin: 0;
   padding: 0;
 }
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
 }
+
 .main{
   display: flex;
   flex-direction: column;
@@ -34,7 +38,7 @@ body {
   color: aliceblue;
 }
 .jumbo{
-  background-color: rgb(180, 16, 245);
+  background-color: rgba(26, 2, 36, 0.753);
   width: 100vw;
   height: 35vh;
   margin: 0;
@@ -87,6 +91,16 @@ nav .bread-nav{
   text-decoration: none;
   background-size: cover;
 }
+nav .signup{
+ 
+ float: right;
+
+  background-color: blue;
+  color: #fff;
+  text-decoration: none;
+  background-size: cover;
+}
+
  .user-view{
   width: 60vw;
   height: 10vh;
@@ -114,7 +128,7 @@ nav .bread-nav{
 form{
   border-style: inset;
  display: flex;
- flex-direction: column;
+
  width: auto;
  height: 50vh;
 margin: 4px;
@@ -122,7 +136,11 @@ padding: 16px ;
  justify-content: center;
  align-items: center;
  font-size: large;
- background-color: rgb(230, 131, 2);
+
+ 
+}
+form input{
+  height: 35px;
   
 }
 form .form-control{
@@ -131,7 +149,11 @@ form .form-control{
   
 }
 form .submit{
-  background-color: rgb(112, 5, 201);
+  position: relative;
+  right: 10;
+  background-color: rgba(74, 13, 180, 0.959);
   color: #fff;
   font-size: large;
 }
+
+ 

@@ -6,9 +6,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server":"json-server --watch db.json --port 5000"
+    "server": "json-server --watch db.json --port 5000"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "json-server": "^0.16.3",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

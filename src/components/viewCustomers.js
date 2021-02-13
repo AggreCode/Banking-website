@@ -8,9 +8,9 @@ function Users({users}) {
            
         
        {
-                users.map((user)=>{
+                users.map((user,id)=>{
                     return (
-                        <div  className="user-view">
+                        <div className="user-view" key={id}>
                               <h3>{user.name}</h3>
                               <div className="desript">Rs {user.balance}</div>
                             </div>

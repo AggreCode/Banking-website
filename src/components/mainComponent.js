@@ -1,5 +1,5 @@
 import React from 'react'
-import {useState, useEffect} from 'react'
+
 import { Media, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Users from './viewCustomers'
 import TransferPage from './TransferPage'
