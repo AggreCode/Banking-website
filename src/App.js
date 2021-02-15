@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import App2 from './App2.js'
 import Header from './components/header.js'
-
+import LogInComponenet from './components/LogInComponenet.js'
+import Users from './components/viewCustomers.js'
+import TransferPage from './components/TransferPage.js'
 import SignUp from './components/signUpComponent.js'
 import {useState, useEffect} from 'react'
 import { BrowserRouter, Link, Switch, Route, Router, Redirect } from 'react-router-dom'
@@ -36,9 +38,14 @@ useEffect(()=>{
    
        <BrowserRouter>
        <Switch>
+
        <Route exact path='/home' component={()=><App2 users={users} setUser={setUser} setLogbook={setLogbook} logbook={logbook}/>}/>
        <Route exact path='/viewlog' component={()=><Header logbook={logbook} />}/>
        <Route exact path='/signup' component={()=><SignUp setUser={setUser} users={users} />}/>
+       <Route exact path='/login' component={()=><LogInComponenet />}/>
+       <Route exact path='/viewcustomers' component={()=><Users users={users} />}/>
+       <Route exact path='/pay' component={()=><TransferPage users={users}logbook={logbook} setLogbook= {setLogbook} />}/>
+
        <Redirect to= '/home'/>
        </Switch>
         </BrowserRouter>

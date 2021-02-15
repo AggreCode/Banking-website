@@ -1,105 +1,182 @@
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* head*/
 html{
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-
-.main{
-  display: flex;
-  flex-direction: column;
-}
-.nav-container{
-  display: flex;
- 
- 
-  height: 50px;
-  background-color: brown;
-}
-.nav-container a:hover{
-  color: aqua;
-}
-.nav-container a.active{
-  color: aqua;
-}
-.nav-container a{
-  margin: 4px;
-  padding: 10px;
-  text-decoration: none;
-  color: aliceblue;
-}
-.jumbo{
-  background-color: rgba(26, 2, 36, 0.753);
-  width: 100vw;
-  height: 35vh;
-  margin: 0;
-  padding: 25px;
-  color: #fff;
-}
-.jumbo h4{
-  font-size: 33px;
+*{
+  box-sizing: border-box;
   
 }
-.jumbo p{
-  margin-top: 5px;
+.nav-bar{
+  display: flex;
+  position: relative;
 }
-.aim{
-  display:flex;
-  flex-direction: column;
+.logo img{
+  height: 65px;
+  margin: 0px;
+  padding: 15px;
+  font-size: larger;
+}
+
+.aim-header{
+ 
+  border-radius:12px;
+  position: relative;
+  margin:12px ;
+  padding:25px;
+  display: flex;
+  justify-content: center;
+}
+.aim2-header{
+  background-color: rgb(96, 199, 212);
+  border-radius: 50%;
+  position: relative;
+  left: 20vw;
+  width:60vw;
+  color: rgb(245, 248, 252);
+ padding:45px;
+  display: flex;
+ 
+  justify-content: center;
+}
+
+.aim .aim-header img{
+  height: 20px;
+  width:50px;
+}
+.aim-body{
+  position: absolute;
+  top:56px;
+  display: flex;
+  justify-content: center;
+}
+.aim2-body{
+  position: absolute;
+  color: rgb(6, 70, 112);
+  top:70px;
+  display: flex;
+  justify-content: center;
+  font-size: large;
+}
+.options ul{
+  position: absolute;
+  top: 14px;
+  left:17vw;
+  list-style: none;
+  margin:0px;
+  padding-left:28px;
+  display: flex;
+  justify-content: space-around;
+
+}
+ul li{
+  padding: 10px;
+}
+
+ul li a {
+  text-decoration: none;
+  color: rgb(143, 127, 127);
+  font-size: large;
+}
+a:hover{
+  color:rgb(56, 219, 219)
+}
+.sign-log{
+  position:absolute;
+  top:4vh;
+  right: 7vw
+  
+}
+.sign-log button{
+  margin-left: 8px;
+  text-decoration: none;
+  height: 32px;
+  width: 86px;
+  background-color: white;
+  border-width: 5px;
+  border-radius: 11px;
+  border-color: rgb(122, 236, 240);
+  
+  
+}
+.sign-log button a{
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+}
+.afterAuth{
+  position:absolute;
+  top:4vh;
+  right: 7vw
+  
+}
+.afterAuth button{
+  margin-left: 8px;
+  text-decoration: none;
+  height: 32px;
+  width: 85px;
+  background-color: white;
+  border-width: 5px;
+  border-radius: 11px;
+  border-color: rgb(122, 236, 240);
+  
+  
+}
+.afterAuth button a{
+  text-decoration: none;
+  font-size: 17px;
+  color: black;
+}
+.hero-image,.hero,.aim img{
+  width: 90vw;
+  height: 50vh;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  padding: 12px;
-  font-size: 24px;
+
 }
-.aim h3{
-  color: rgb(22, 233, 22);
+.get-started{
+ width: 100vw;
+ 
+  position:absolute;
+  top:150vh;
+  display:flex;
+  justify-content: center;
 }
-.aim p{
-  margin-top: 7px;
-  font-size: 18px;
+.get-started button{
+ border-radius: 10px;
+ border-color: rgb(71, 227, 233);
+ background-color:white;
+  height: 50px;
+  width: 230px;
 }
-.bread{
-  margin-top: 5px;
-  float: left;
+.get-started button a {
+    
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 23px;
+  text-decoration: none;
+  color: rgb(36, 141, 173);
+}
+.get-started button a {
+  outline: none;
+}
+.quotes img{
+  width: 100vw;
+  height: 80vh;
+ position: absolute;
+ top: 200vh;
   
 }
-button,a .bread-item{
-  margin-left: 8px;
-  text-decoration: underline;
-  text-align: center;
-  font-size: 17px;
+.last img{
+ width: 100vw;
+ height: 45vh;
+ position: absolute;
+ top: 183vh;
+ left: 0;
 }
 
-button.bread-item{
-  background-color: blue;
-  color: #fff;
-  text-decoration: none;
-}
-nav .bread-nav{
-  background-color: blue;
-  color: #fff;
-  text-decoration: none;
-  background-size: cover;
-}
-nav .signup{
+
  
- float: right;
-
-  background-color: blue;
-  color: #fff;
-  text-decoration: none;
-  background-size: cover;
-}
 
  .user-view{
   width: 60vw;
@@ -125,35 +202,97 @@ nav .signup{
   
 
 }
-form{
+#signupform{
+  position: absolute;
   border-style: inset;
  display: flex;
-
- width: auto;
- height: 50vh;
-margin: 4px;
-padding: 16px ;
+ width: 60vw;
+ height:80vh;
+ left: 20vw;
+ flex-direction: column;
  justify-content: center;
  align-items: center;
  font-size: large;
 
  
 }
-form input{
+#signupform input{
+  margin-left: 6px;
   height: 35px;
+  border-radius: 12px;
+  border-color: rgb(148, 219, 219);
   
 }
-form .form-control{
+ a:focus{
+  outline:none;
+}
+ #signupform input:focus{
+outline: none;
+}
+ #signupform .form-control{
   margin: 5px;
   padding: 12px;
   
 }
-form .submit{
+ #signupform .submit{
   position: relative;
   right: 10;
   background-color: rgba(74, 13, 180, 0.959);
   color: #fff;
   font-size: large;
 }
+#payform{
+  position: absolute;
+  border-style: inset;
+ display: flex;
+ width: 60vw;
+ height:80vh;
+ left: 20vw;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ font-size: large;
 
  
+}
+#payform input{
+  margin-left: 6px;
+  height: 35px;
+  border-radius: 12px;
+  border-color: rgb(148, 219, 219);
+  
+}
+#payform input:focus{
+  outline: none;
+  }
+   #payform .form-control{
+    margin: 5px;
+    padding: 12px;
+    
+  }
+   #payform .submit{
+    position: relative;
+    right: 10;
+    background-color: rgba(74, 13, 180, 0.959);
+    color: #fff;
+    font-size: large;
+  }
+table{
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  border: 1px;
+  width: 60%;
+  padding: 20%;
+}
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(odd){
+  background-color: aliceblue;
+}
+tr.header{
+  background-color: rgb(89, 158, 218);
+  color:aliceblue
+}

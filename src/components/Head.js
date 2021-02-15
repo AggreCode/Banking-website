@@ -1,48 +1,69 @@
 import React from 'react'
+import {useState, useEffect} from 'react'
 
-function Head() {
+
+function Head({setMopen}) {
+    const [auth,setAuth] = useState(false)
+   
     return (
        
              <div class="container">
         <div class="nav-bar">
             <div class="logo"> 
-                <img src="./css/images/Group 1.png" alt="Logo" />
+                <img src={require("./css/images/Group 1.png")} alt="Logo" />
              </div> 
-             <div class="options"> 
+             <div className="options"> 
              <ul>
             <li><a href="./" class="nav-link">Home</a></li>
             <li><a href="./" class="nav-link">About Us</a></li>
             <li><a href="./" class="nav-link">Contact Us</a></li>
              </ul>
-             
-              <div class="sign-log">
-                <button class="signup"><a href="/signup" class="signup">Sign Up</a></button>
-                <button class="Log In"><a href="/login" class="login">Log In</a></button>
+             {auth?
+             <div className="afterAuth">
+             <button class="signup"><a href="/pay" class="">Pay</a></button>
+              <button class="Log In"><a href="/viewlog" class="login">Log</a></button>
+              <button class="Log In"><a href="/viewcustomers" class="login">users</a></button>
         
-             </div>
+             </div>:
+         
+              <div className="sign-log">
+                <button class="signup"><a href="/signup" class="signup">Sign Up</a></button>
+                <button class="Log In" onClick={()=>setMopen(true)}>LogIn</button>
+        
+             </div>}
             </div> 
             
         
         </div>
         <hr />
-        <div class="hero-image">
-            <img src="./css/images/Group 2.png" alt="hero-image" />
+        <div className="hero-image">
+            <img src={require("./css/images/Group 2.png")} alt="hero-image" />
         </div>
-        <div class="hero">
-            <img src="./css/images/Group 3.png" alt="hero" />
+        <div className="aim">
+        <div className="aim-header">
+           <h2> Welcome To Biswa Bank</h2> <img src={require("./css/images/Group 10.png")} alt="logo-image" />
+           <div className="aim-body">
+         <h5> Biswa Bank will revolutionize the system</h5>
+         </div>
+         
+         </div>
+
+      
+                 </div>
+        <div className="aim2-header">
+        <h2> Our Aim</h2> 
+          <div className="aim2-body">
+         <h5> Let's embark on a journey to  decentralise the Indian Banking System</h5>
+         </div>
         </div>
-              <div class="aim">
-                  <img src="./css/images/Group 10.png" alt="aim" />
-              </div>
-             <div class="get-started">
-                 <button><a href="" class="get-start">Get Started
+       
+             <div className="get-started">
+                 <button><a href="/signup" class="get-start">Get Started
                 </a>    </button>
              </div>
-            <div class="quotes">
-                <img src="./css/images/Group 7.png" alt="" />
-            </div>
-            <div class="last">
-                <img src="./css/images/Group 9.png" alt="" />
+          
+            <div className="last">
+                <img src={require("./css/images/Group 11.png")} alt="last" />
             </div>
             </div>
       
