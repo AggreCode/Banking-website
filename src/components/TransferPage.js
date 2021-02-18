@@ -7,7 +7,7 @@ const TransferPage=({users,setLogbook, logbook,  history})=> {
     const [name,setName]=useState('')
     const [name2,setName2]=useState('')
     const [amount,setAmount]=useState(0)
-    const [auth,setAuth] =useState(false)
+    
      const fetchUser= async (id)=>{
       const token = localStorage.getItem('token');
      const res= await fetch (`http://localhost:5000/users/${id}`, {
@@ -117,11 +117,9 @@ const TransferPage=({users,setLogbook, logbook,  history})=> {
     setName('')
    setName2('')
    setAmount(0)
-   history.push("/home");
+   
  }
- const authChange=()=>{
-    setAuth(!auth)
- }
+ 
     return (
        
      

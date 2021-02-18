@@ -6,8 +6,10 @@ import {useState, useEffect} from 'react'
 function LogInComponenet({users,setAuth}) {
   const[username,setUsername]= useState("")
   const[password,setPassword]= useState("")
-  var isRegister;
   const history = useHistory();
+useEffect(()=>{
+setAuth(false)
+},[])
  
 const handleLogin=async(e)=>{
   e.preventDefault();
@@ -28,7 +30,9 @@ if(res.ok){
    localStorage.setItem('auth2',true);
    localStorage.setItem('token', data.token);
    setAuth(true)
-   history.push("/home");
+   alert("You have successfully logged in")
+  
+  
  }
  else {
   alert("please register yourself")
@@ -54,12 +58,7 @@ if(res.ok){
             <button type="submit" >Submit</button>
             <span>Didn't Registered Yet?&nbsp; &nbsp;<a href="/signup">Register Here</a></span>
              </form>
-             {
-                 isRegister ? 
-
-                 <Redirect to="/home"/>
-                : null
-         }
+            
 
            </div>
 
