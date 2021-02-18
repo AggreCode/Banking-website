@@ -33,15 +33,17 @@ const Main=()=> {
   const [logbook,setLogbook]= useState(
     []
   )
-  const [auth,setAuth]= useState(false)
+ 
   const [toglog,setTogLog]=useState(true)
  
   
 useEffect(()=>{
+   
   const token = localStorage.getItem('token');
  
  console.log(localStorage.getItem('auth2'))
   console.log(token)
+
   fetch('http://localhost:5000/users',{
 
   headers: {
@@ -68,16 +70,16 @@ useEffect(()=>{
 
  return (
       <div>
-  <Navigationheader auth={auth} setAuth={setAuth}   history={history}/>
+  <Navigationheader    history={history}/>
        <BrowserRouter>
        <Switch>
 
        <Route exact path='/home' component={()=><Head  />}/>
-       <Route exact path='/viewlog' component={()=><Header logbook={logbook} history={history} />}/>
-       <Route exact path='/signup' component={()=><SignUp setUser={setUser} users={users} history={history} />}/>
-       <Route exact path='/login' component={()=><LogInComponenet users={users} setAuth ={setAuth} />}/>
-       <Route exact path='/viewcustomers' component={()=><Users users={users} history={history}/>}/>
-       <Route exact path='/pay' component={()=><TransferPage users={users}logbook={logbook} history={history} setLogbook= {setLogbook} />}/>
+       <Route exact path='/viewlog' component={()=><Header logbook={logbook}/>}/>
+       <Route exact path='/signup' component={()=><SignUp setUser={setUser} users={users} />}/>
+       <Route exact path='/login' component={()=><LogInComponenet users={users} />}/>
+       <Route exact path='/viewcustomers' component={()=><Users users={users} />}/>
+       <Route exact path='/pay' component={()=><TransferPage users={users}logbook={logbook}  setLogbook= {setLogbook} />}/>
        <Route exact path='/logout' component={()=><Logout />}/>
 
        <Redirect to= '/home'/>

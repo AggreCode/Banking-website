@@ -1,7 +1,7 @@
 import React from 'react'
 
-function Navigationheader({auth,history,setAuth}) {
-    
+function Navigationheader({history}) {
+
     
     const LogOut=async()=>{
        const res = await fetch('http://localhost:5000/auth/logout')
@@ -9,10 +9,10 @@ function Navigationheader({auth,history,setAuth}) {
   
        localStorage.setItem('auth2',false);
        localStorage.setItem('token', data.token);
-       setAuth(false)
+     
        console.log(localStorage.getItem('token'))
        console.log(localStorage.getItem('auth2'))
-        
+        history.push('/home')
         
       
     }
@@ -28,7 +28,7 @@ function Navigationheader({auth,history,setAuth}) {
             <li><a href="./" className="nav-link">About Us</a></li>
             <li><a href="./"  className="nav-link">Contact Us</a></li>
              </ul>
-             {auth?
+             {localStorage.getItem('auth2')?
              <div className="afterAuth">
              <button className="signup"><a href="/pay" className="">Pay</a></button>
               <button className="Log In"><a href="/viewlog" className="login">Log</a></button>
