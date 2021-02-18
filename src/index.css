@@ -1,4 +1,6 @@
 /* head*/
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
 html{
   scroll-behavior: smooth;
   overflow-x: hidden;
@@ -295,4 +297,98 @@ tr:nth-child(odd){
 tr.header{
   background-color: rgb(89, 158, 218);
   color:aliceblue
+}
+
+
+
+
+
+
+/* LOGIN */
+.login-component .container{
+ 
+ position: relative;
+ 
+  background-color: #fff;
+	border-radius: 10px;
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+			0 10px 10px rgba(0,0,0,0.22);
+
+	overflow: hidden;
+	width: 768px;
+	max-width: 100%;
+	min-height: 480px;
+ 
+}
+@media only screen and (min-width:800px){
+ .login-component .container{
+    width:60%;
+    left:20%;
+  }
+}
+
+.overlay{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left:0;
+  top:0;
+  background-color:rgb(0, 255, 255);
+  height:480px ;
+  width:50%;
+}
+.overlay h5{
+  font-size: 45px;
+  font-weight: 100;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 1px;
+  color: #fff;
+}
+.form-login form{
+  position: absolute;
+ width:50%;
+ font-family: 'Montserrat', sans-serif;
+
+  height:480px;
+  top:0;
+  right:0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ 
+}
+.form-login form a{
+ text-decoration: none;
+ color: rgb(46, 228, 209);
+ font-weight: 200;
+}
+
+.form-login input{
+
+  width:200px;
+  border-radius: 12px;
+  border:2px rgb(128, 188, 245) solid;
+  margin:12px;
+  padding: 8px;
+  
+}
+input:focus{
+  outline:none;
+}
+.form-login button{
+  width:85px;
+  height:34px;
+  border-radius:12px;
+  border-color: turquoise;
+  background: transparent;
+  transition: transform 80ms ease-in;
+}
+button:active{
+  transform:scale(0.95)
+}
+button:focus{
+  outline:none
 }

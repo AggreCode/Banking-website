@@ -2,14 +2,21 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 const axios = require('axios');
 
-const TransferPage=({users,setLogbook, logbook})=> {
+const TransferPage=({users,setLogbook, logbook,  history})=> {
     const [togview,setView]= useState(false)
     const [name,setName]=useState('')
     const [name2,setName2]=useState('')
     const [amount,setAmount]=useState(0)
     const [auth,setAuth] =useState(false)
      const fetchUser= async (id)=>{
-     const res= await fetch (`http://localhost:5000/users/${id}`)
+      const token = localStorage.getItem('token');
+     const res= await fetch (`http://localhost:5000/users/${id}`, {
+    
+      headers: {
+          'Content-Type': 'application/json',
+          'x-access-token': token
+      }
+  })
      const data =  res.json();
      return data
    }
@@ -30,7 +37,17 @@ const TransferPage=({users,setLogbook, logbook})=> {
  const AddLog= (log)=>{
   
 
- axios.post('http://localhost:5000/logs',log)
+ 
+ const token = localStorage.getItem('token');
+
+  fetch(`http://localhost:5000/logs`, {
+     method: 'POST',
+     body: JSON.stringify(log),
+     headers: {
+         'Content-Type': 'application/json',
+         'x-access-token': token
+     }
+ })
  .then(res =>{
             console.log(res)
             setLogbook([...logbook,res])   
@@ -68,7 +85,7 @@ const TransferPage=({users,setLogbook, logbook})=> {
      alert("error")
      return
    }
-
+   const token = localStorage.getItem('token');
     const upreceiver ={...receiver,balance: receiver.balance + parseInt(amount)}
   
     const upsender ={...sender,balance: sender.balance - parseInt(amount)}
@@ -77,14 +94,16 @@ const TransferPage=({users,setLogbook, logbook})=> {
     const res1 = await fetch(`http://localhost:5000/users/${id1}`,{
       method:"PUT",
       headers:{
-        'Content-type':'application/json'
+        'Content-type':'application/json',
+        'x-access-token': token
       },
       body: JSON.stringify(upsender)
     })
     const res2 = await fetch(`http://localhost:5000/users/${id2}`,{
      method:"PUT",
      headers:{
-       'Content-type':'application/json'
+       'Content-type':'application/json',
+       'x-access-token': token
      },
      body: JSON.stringify(upreceiver)
    })
@@ -98,6 +117,7 @@ const TransferPage=({users,setLogbook, logbook})=> {
     setName('')
    setName2('')
    setAmount(0)
+   history.push("/home");
  }
  const authChange=()=>{
     setAuth(!auth)

@@ -1,53 +1,72 @@
 import React from 'react'
 import ReactModalLogin from "react-modal-login";
+import { BrowserRouter, Link, Switch, Route, Router, Redirect } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import {useState, useEffect} from 'react'
-function LogInComponenet() {
-    const[showModal,setShowModal]= useState(true)
-    const [loading,setLoading]= useState(false)
-    const [error, setError]= useState(null)
-    const openModal=()=>{
-        setShowModal(true)
-    }
-    const closeModal=()=>{
-        setShowModal(false)
-        setError(null)
-    }
-   const onLoginSuccess=(method, response) =>{
-        console.log("logged successfully with " + method);
-      }
-    const  onLoginFail=(method, response)=> {
-        console.log("logging failed with " + method);
-        setError(response)
-      }
-  const startLoading=()=>{
-      setLoading(true)
-
-  }
-  const finishLoading=()=>{
-    setLoading(false)
-    
-}
-
-    return (
-        <div>
-           
+function LogInComponenet({users,setAuth}) {
+  const[username,setUsername]= useState("")
+  const[password,setPassword]= useState("")
+  var isRegister;
+  const history = useHistory();
  
- <ReactModalLogin
-   visible={showModal}
-   onCloseModal={closeModal}
-   loading={loading}
-   error={error}
+const handleLogin=async(e)=>{
+  e.preventDefault();
+ 
+
+ const dataobj = {username,password}
+ const res = await fetch('http://localhost:5000/auth/login',{
+  method:"POST",
+  headers:{
+          "Content-type":"application/json"
+  },
+  body:JSON.stringify(dataobj)
+})
+const data = await res.json()
+ console.log(data.token)
+if(res.ok){
   
-   loginError={{
-     label: "Couldn't sign in, please try again."
-   }}
-   registerError={{
-     label: "Couldn't sign up, please try again."
-   }}
-   startLoading={startLoading}
-   finishLoading={finishLoading}
-  
- />
+   localStorage.setItem('auth2',true);
+   localStorage.setItem('token', data.token);
+   setAuth(true)
+   history.push("/home");
+ }
+ else {
+  alert("please register yourself")
+ }
+ 
+}
+    return (
+        <div className="login-component">
+          <div className="container">
+    <div className="overlay">
+      <h5>Welcome
+       <br />&nbsp; &nbsp;  To   <br />
+       Biswa Bank</h5>
+    </div>
+
+       
+       
+          <div className="form-login">
+             <form onSubmit={handleLogin} >
+             <h2>Log In</h2>
+               <input type="text" placeholder="Username" onChange={e=>setUsername(e.target.value)} required/>
+               <input  type="password" placeholder="Password"onChange={e=>setPassword(e.target.value)} required/>
+            <button type="submit" >Submit</button>
+            <span>Didn't Registered Yet?&nbsp; &nbsp;<a href="/signup">Register Here</a></span>
+             </form>
+             {
+                 isRegister ? 
+
+                 <Redirect to="/home"/>
+                : null
+         }
+
+           </div>
+
+        
+          </div>
+     
+ 
         </div>
     )
 }

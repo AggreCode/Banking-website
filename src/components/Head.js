@@ -2,40 +2,12 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 
 
-function Head({setMopen}) {
-    const [auth,setAuth] = useState(false)
+function Head({auth}) {
    
     return (
        
              <div class="container">
-        <div class="nav-bar">
-            <div class="logo"> 
-                <img src={require("./css/images/Group 1.png")} alt="Logo" />
-             </div> 
-             <div className="options"> 
-             <ul>
-            <li><a href="./" class="nav-link">Home</a></li>
-            <li><a href="./" class="nav-link">About Us</a></li>
-            <li><a href="./" class="nav-link">Contact Us</a></li>
-             </ul>
-             {auth?
-             <div className="afterAuth">
-             <button class="signup"><a href="/pay" class="">Pay</a></button>
-              <button class="Log In"><a href="/viewlog" class="login">Log</a></button>
-              <button class="Log In"><a href="/viewcustomers" class="login">users</a></button>
-        
-             </div>:
-         
-              <div className="sign-log">
-                <button class="signup"><a href="/signup" class="signup">Sign Up</a></button>
-                <button class="Log In" onClick={()=>setMopen(true)}>LogIn</button>
-        
-             </div>}
-            </div> 
-            
-        
-        </div>
-        <hr />
+     
         <div className="hero-image">
             <img src={require("./css/images/Group 2.png")} alt="hero-image" />
         </div>
