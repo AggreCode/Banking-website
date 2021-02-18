@@ -1,5 +1,6 @@
 import React from 'react'
 
+<<<<<<< HEAD
 function Navigationheader({auth,history,setAuth}) {
     
     
@@ -45,6 +46,15 @@ function Navigationheader({auth,history,setAuth}) {
         
         </div>
         <hr />
+=======
+function Navigationheader({history,setAuth,auth}) {
+
+    
+  
+    return (
+        <div>
+
+>>>>>>> new
         </div>
     )
 }

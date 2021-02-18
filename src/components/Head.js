@@ -1,48 +1,81 @@
 import React from 'react'
+import {useState, useEffect} from 'react'
 
-function Head() {
+
+function Head({auth,history,setAuth}) {
+    const LogOut=async()=>{
+        const res = await fetch('http://localhost:5000/auth/logout')
+        const data = await res.json()
+   
+        localStorage.setItem('auth2',false);
+        localStorage.setItem('token', data.token);
+       setAuth(false)
+        console.log(localStorage.getItem('token'))
+        console.log(localStorage.getItem('auth2'))
+         history.push('/home')
+         
+       
+     }
+   
     return (
        
              <div class="container">
-        <div class="nav-bar">
-            <div class="logo"> 
-                <img src="./css/images/Group 1.png" alt="Logo" />
+                                <div className="nav-bar">
+            <div className="logo"> 
+                <img src={require("./css/images/Group 1.png")} alt="Logo" />
              </div> 
-             <div class="options"> 
+             <div className="options"> 
              <ul>
-            <li><a href="./" class="nav-link">Home</a></li>
-            <li><a href="./" class="nav-link">About Us</a></li>
-            <li><a href="./" class="nav-link">Contact Us</a></li>
+            <li><a href="./" className="nav-link">Home</a></li>
+            <li><a href="./" className="nav-link">About Us</a></li>
+            <li><a href="./"  className="nav-link">Contact Us</a></li>
              </ul>
-             
-              <div class="sign-log">
-                <button class="signup"><a href="/signup" class="signup">Sign Up</a></button>
-                <button class="Log In"><a href="/login" class="login">Log In</a></button>
+             {auth?
+             <div className="afterAuth">
+             <button className="signup"><a href="/pay" className="">Pay</a></button>
+              <button className="Log In"><a href="/viewlog" className="login">Log</a></button>
+              <button className="Log In"><a href="/viewcustomers" className="login">users</a></button>
+              <button className="Log In" onClick={LogOut}>LogOut</button>
+             </div>:
+         
+              <div className="sign-log">
+                       <button  className="log-sign"><a href="/login"  className="login">Log In</a></button>
         
-             </div>
+             </div>}
             </div> 
             
         
         </div>
         <hr />
-        <div class="hero-image">
-            <img src="./css/images/Group 2.png" alt="hero-image" />
+     
+        <div className="hero-image">
+            <img src={require("./css/images/Group 2.png")} alt="hero-image" />
         </div>
-        <div class="hero">
-            <img src="./css/images/Group 3.png" alt="hero" />
+        <div className="aim">
+        <div className="aim-header">
+           <h2> Welcome To Biswa Bank</h2> <img src={require("./css/images/Group 10.png")} alt="logo-image" />
+           <div className="aim-body">
+         <h5> Biswa Bank will revolutionize the system</h5>
+         </div>
+         
+         </div>
+
+      
+                 </div>
+        <div className="aim2-header">
+        <h2> Our Aim</h2> 
+          <div className="aim2-body">
+         <h5> Let's embark on a journey to  decentralise the Indian Banking System</h5>
+         </div>
         </div>
-              <div class="aim">
-                  <img src="./css/images/Group 10.png" alt="aim" />
-              </div>
-             <div class="get-started">
-                 <button><a href="" class="get-start">Get Started
+       
+             <div className="get-started">
+                 <button><a href="/signup" class="get-start">Get Started
                 </a>    </button>
              </div>
-            <div class="quotes">
-                <img src="./css/images/Group 7.png" alt="" />
-            </div>
-            <div class="last">
-                <img src="./css/images/Group 9.png" alt="" />
+          
+            <div className="last">
+                <img src={require("./css/images/Group 11.png")} alt="last" />
             </div>
             </div>
       

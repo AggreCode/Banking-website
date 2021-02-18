@@ -1,51 +1,25 @@
-import React, { Component } from "react";
-import App2 from './App2.js'
-import Header from './components/header.js'
+import React, { Component } from 'react';
+import Main from './components/mainComponent';
 
-import SignUp from './components/signUpComponent.js'
-import {useState, useEffect} from 'react'
-import { BrowserRouter, Link, Switch, Route, Router, Redirect } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { ConfigureStore } from './redux/configureStore';
 
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+const store = ConfigureStore();
 
+class App extends Component {
 
-
-const App=()=> {
-   
-    const [users,setUser]= useState([])
-  const [logbook,setLogbook]= useState(
-    []
-  )
-  const [toglog,setTogLog]=useState(true)
-useEffect(()=>{
-  fetch('http://localhost:5000/users')
-  .then((res)=> res.json())
-  .then((data)=> setUser(data))
-  .catch((err)=>console.log({msg:err}))
-  fetch('http://localhost:5000/logs')
-  .then((res)=> res.json())
-  .then((data)=> {setLogbook(data)
-      console.log(data)})
-  .catch((err)=>console.log({msg:err}))
-},[])
-
- 
-  
-  
+  render() {
     return (
-   
-       <BrowserRouter>
-       <Switch>
-       <Route exact path='/home' component={()=><App2 users={users} setUser={setUser} setLogbook={setLogbook} logbook={logbook}/>}/>
-       <Route exact path='/viewlog' component={()=><Header logbook={logbook} />}/>
-       <Route exact path='/signup' component={()=><SignUp setUser={setUser} users={users} />}/>
-       <Redirect to= '/home'/>
-       </Switch>
+    
+        <BrowserRouter>
+          <div>
+            <Main />
+          </div>
         </BrowserRouter>
-        
-       
-    )
-  
+    
+    );
+  }
 }
 
 export default App;

@@ -1,43 +1,96 @@
-import React from 'react'
+import React, { Component } from "react";
 
-import { Media, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import Users from './viewCustomers'
-import TransferPage from './TransferPage'
-import {Link} from 'react-router-dom'
-const Home =()=>{
-    return(
-     <div className="aim">
-     <h3>Our Aim</h3>
-     <hr/>
-     <p>i similique nesciunt, fugiat dolores ab facilis voluptates autem labore id quasi, eligendi quia?
+import Header from './header.js'
+import LogInComponenet from './LogInComponenet.js'
+import Users from './viewCustomers.js'
+import Head from './Head.js'
+import Logout from './logout.js'
+import TransferPage from './TransferPage.js'
+import Navigationheader from './navigation-header.js'
+import SignUp from './signUpComponent.js'
+import {useState, useEffect} from 'react'
+import { BrowserRouter, Link, Switch, Route, Router, Redirect,withRouter } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+import {  loginUser } from '../redux/ActionCreator';
 
-     </p>
-   </div>
-    )
- }
-
- 
-function  Main({toggleUse,togview, users}) {
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { connect } from 'react-redux';
+// const mapStateToProps = state => {
+//     return {
     
+//       auth: state.auth
+//     }
+// }
  
+// const mapDispatchToProps = (dispatch) => ({
+//     loginUser: (creds) => dispatch(loginUser(creds)),
+//    });
+  
 
-    return (
-        <div className="main">
-         
-            
-            <div className='bread'>
-            <a className="bread-item active">Home</a>
-             <button className="bread-item" onClick={toggleUse}> View All Customers </button>
-              </div>
-                <div>
-          
-               {!togview? <Home /> :<Users users={users}/>}
-                
-                    </div>
+const Main=()=> {
+  const history = useHistory();
+    const [users,setUser]= useState([])
+  const [logbook,setLogbook]= useState(
+    []
+  )
+ 
+ 
+   const[auth,setAuth] = useState(false)
+  
+useEffect(()=>{
+   
+  const token = localStorage.getItem('token');
+ 
+ console.log(localStorage.getItem('auth2'))
+  console.log(token)
+   setAuth(localStorage.getItem('auth2'))
+  fetch('http://localhost:5000/users',{
 
-             
-        </div>
+  headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': token
+  }
+})
+  .then((res)=> res.json())
+  .then((data)=> setUser(data))
+  .catch((err)=>console.log({msg:err}))
+  fetch('http://localhost:5000/logs',{
+
+    headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+    }
+  })
+  .then((res)=> res.json())
+  .then((data)=> {setLogbook(data)
+      console.log(data)})
+  .catch((err)=>console.log({msg:err}))
+  console.log(logbook)
+},[])
+
+ return (
+      <div>
+  
+       <BrowserRouter>
+       <Switch>
+
+       <Route exact path='/home' component={()=><Head  auth={auth} setAuth={setAuth}  history={history}/>}/>
+       <Route exact path='/viewlog' component={()=><Header logbook={logbook}/>}/>
+       <Route exact path='/signup' component={()=><SignUp setUser={setUser} users={users} />}/>
+       <Route exact path='/login' component={()=><LogInComponenet users={users} setAuth={setAuth} history={history} />}/>
+       <Route exact path='/viewcustomers' component={()=><Users users={users} />}/>
+       <Route exact path='/pay' component={()=><TransferPage users={users}logbook={logbook}  setLogbook= {setLogbook} />}/>
+       <Route exact path='/logout' component={()=><Logout />}/>
+
+       <Redirect to= '/home'/>
+       </Switch>
+        </BrowserRouter>
+      </div>
+    
+        
+       
     )
+  
 }
 
-export default  Main
+export default Main
